@@ -31,6 +31,8 @@ admin.firestore().settings({
 app.use('*', async (req, res, next) => {
 	try {
 		req.member = admin.firestore().collection('members');
+		req.opportunity = admin.firestore().collection('opportunities');
+		req.activity = admin.firestore().collection('activities');
 		return next()
 	} catch (error) {
 		return res.status(400).send(error)
