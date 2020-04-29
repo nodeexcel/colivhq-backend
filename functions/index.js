@@ -31,14 +31,13 @@ admin.firestore().settings({
 app.use('*', async (req, res, next) => {
 	try {
 		req.home = admin.firestore().collection('homes');
+		req.member = admin.firestore().collection('members');
 		return next()
 	} catch (error) {
 		return res.status(400).send(error)
 	}
 })
-app.get('/test', (req, res) => {
-	res.send("ok");
-})
+
 app.use("/", routes)
 
 const api = functions.https.onRequest(app)
