@@ -32,6 +32,11 @@ module.exports.addMembers = async (req, res, next) => {
         if (!ageGroup.includes(req.body.ageGroup))
             throw new Error('ageGroup can be only 18-22, 23-27, 28-32, 33-37, 38+');
 
+        let member = await req.member.where('emailAddress', '==', req.body.emailAddress).get()
+        
+        if(!member.empty)
+            throw new Error('email id already added')
+
         let data = {
             type: req.body.type,
             status: req.body.status,
