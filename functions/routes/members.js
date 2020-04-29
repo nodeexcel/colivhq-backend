@@ -1,19 +1,8 @@
 const router = require("express").Router();
+const membersController = require('../controller/member');
 
+router.get('/get', membersController.getMembers);
 
-router.get('/', async (req, res, next) => {
-	let member = await req.member.get()
+router.post('/add', membersController.addMembers);
 
-	let finalData = [];
-
-	member.forEach(doc => {
-		finalData.push({
-			id: doc.id,
-			...doc.data()
-		})
-	});
-	res.send({
-		data: finalData
-	});
-})
 module.exports = router

@@ -30,7 +30,6 @@ admin.firestore().settings({
 })
 app.use('*', async (req, res, next) => {
 	try {
-		req.home = admin.firestore().collection('homes');
 		req.member = admin.firestore().collection('members');
 		return next()
 	} catch (error) {
